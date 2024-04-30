@@ -1,0 +1,9 @@
+# ROLE.YAML 
+
+---
+
+  - name: "executing my role"
+    hosts: north
+    become: yes
+    roles:
+    - testrole1

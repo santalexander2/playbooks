@@ -1,0 +1,35 @@
+#homework.yaml
+#
+
+---
+  - name: homework.yaml
+    hosts: localhost
+    become: yes
+    tasks:
+      - name: install curl
+        package:
+          name: curl
+          state: latest
+
+      - name: Fetch robot.txt
+        command: "curl -o /tmp/robots.txt https://www.digitalocean.com/robots.txt"
+        args:
+          creates: /tmp/robots.txt
+
+      - name: Create gpt-bots folder"
+        file:
+          path: /home/ubuntu/gpt-bots
+          state: directory
+
+      - name: Copy robots.txt to gpt-bots folder
+        ansible.builtin.copy:
+          src: /tmp/robots.txt
+          dest: /home/ubuntu/gpt-bots
+
+
+      - name: Read content of robots.txt
+        command: cat /home/ubuntu/gpt-bots/robots.txt
+        register: robots_txt_content
+
+      - debug:
+          msg: "{{ robots_txt_content.stdout }}"

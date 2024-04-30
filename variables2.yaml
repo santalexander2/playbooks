@@ -1,0 +1,11 @@
+--- 
+- name: "work with variables 2"
+  hosts: north 
+  become: yes
+  vars:
+    secret: mysecretpassword
+  ignore_unreachable: yes
+  tasks: 
+  - name: "print our variable"
+    debug:
+      var: secret

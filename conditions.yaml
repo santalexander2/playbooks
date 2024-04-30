@@ -1,0 +1,18 @@
+# conditions.yaml
+#
+
+--- 
+- name: "Create a condition to update cache on different OS distributions"
+  hosts: all 
+  become: yes
+  tasks: 
+  - name: "Debug"
+    debug:
+      msg: "Print OS {{ansible_os_family}}"
+  - name: "upgrade in RedHat"
+    when: ansible_os_family == "RedHat"
+    yum: name=* state=latest
+
+  - name: "Upgrade in Debian"
+    when: ansible_os_family == "Debian"
+    apt: upgrade=dist update_cache=yes

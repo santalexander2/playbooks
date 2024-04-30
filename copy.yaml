@@ -1,0 +1,23 @@
+# vim copy.yaml
+#
+
+
+---
+  - name: "copy files"
+    hosts: north
+    become: yes
+    tasks: 
+    - name: "copy"
+      ansible.builtin.copy:
+        src: /etc/ansible/hosts
+        dest: /home/ubuntu/
+
+    - name: "capture output of ls command"
+      shell: ls /home/ubuntu/
+      register: command_output
+
+    - name: "display captured output"
+      debug: 
+        var: command_output.stdout_lines   # var - function to display our variable
+          # command_output - is a captured output of LS command
+          # stdout_lines - is another function that goes inside of the captured output and finds and prints everything in line  

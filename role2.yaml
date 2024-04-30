@@ -1,0 +1,9 @@
+# ROLE2.YAML 
+
+---
+
+  - name: "executing my role"
+    hosts: localhost
+    become: yes
+    roles:
+    - webserver_role

@@ -1,0 +1,17 @@
+# name: git_vim_ruby.yaml
+
+
+---
+ - name: "install multiple packages variables"
+   hosts: north
+   become: yes      
+   vars:   # we are create a veriable 
+     packages: [git, vim, ruby]    
+# become_user: ubuntu # run as ubuntu user
+   tasks:               
+   - name: "install packages"
+     apt:                 
+       name: '{{packages}}'
+       state: latest
+     with_items: '{{packages}}'   # to go over each object within packages variable (git, vim, ruby)
+

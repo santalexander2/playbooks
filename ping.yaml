@@ -1,0 +1,16 @@
+# ping.yaml
+#
+
+
+---
+  - name: ping-playbook
+    hosts: east
+    become: yes
+    serial: 1       # specify the order of how you want to run your playbook, one by one, two by two and so on    
+    tasks:
+    - name: test reachibility
+      ping: 
+
+    - name: update package manager
+      apt: 
+        update_cache: yes  

@@ -1,0 +1,12 @@
+# name: firstplaybook.yaml
+
+
+---
+ - name: firstplaybook     # Name of the playbook
+   hosts: 12.23.24.24              # target or instance where you want to run your playbook
+   become: yes             # run as a sudo user 
+   tasks:                  # commands that we want to run
+   - name: install apache2 # name of the task
+     apt:                  # command thet we want to execute
+       name: apache2       # name of the package 
+       state: latest       # 3 states: latest present or absent 

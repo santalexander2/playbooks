@@ -1,0 +1,28 @@
+# name of the file is loop.yaml
+#
+#
+
+
+---
+- name: "Looping though the items"
+  hosts: north 
+  become: yes
+  tasks:
+  - name: "Update package"
+    apt: 
+      update_cache: yes
+
+  - name: "Install PHP Modules"
+    apt: 
+      name: "{{ item }}" 
+      state: present
+    with_items:
+      - php
+      - php-cli
+      - php-common
+      - libapache2-mod-php
+      - php-mbstring
+      - php-xml
+
+# IT slang: HARDCODING - means When I write down all package names in my code instead of using variables 
+    

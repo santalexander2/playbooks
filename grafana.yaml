@@ -1,0 +1,41 @@
+---
+
+- name: Install Grafana
+  hosts: 10.0.0.171
+  become: yes
+  tasks:
+    - name: update package manager
+      yum:
+        update_cache: yes
+
+    - name: Install wget
+      package:
+        name: wget
+        state: present
+
+    - name: "Download Grafana GPG key"
+      shell: wget -q -O gpg.key https://rpm.grafana.com/gpg.key
+
+    - name: "Import GPG key"
+      command: rpm --import gpg.key
+
+    - name: "Add Grafana repo"
+      shell: echo -e "[grafana]\nname=grafana\nbaseurl=https://rpm.grafana.com\nrepo_gpgcheck=1\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.grafana.com/gpg.key\nsslverify=1\nsslcacert=/etc/pki/tls/certs/ca-bundle.crt" >> /etc/yum.repos.d/grafana.repo
+
+    - name: "install grafana"
+      yum:
+        name: grafana
+        state: present
+
+    - name: start grafana
+      service: 
+        name: grafana-server
+        state: started
+
+    - name: enable grafana-server
+      service:
+        name: grafana-server
+        enabled: yes
+
+    - name: "Status check grafana-server"
+      shell: systemctl status grafana-server

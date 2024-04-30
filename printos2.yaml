@@ -1,0 +1,9 @@
+---
+- name: "print OS of the EC2"
+  hosts: north
+  ignore_unreachable: yes
+  become: yes
+  tasks:
+  - name: "print OS of the EC2"
+    debug:
+      msg: "Print OS of the EC2 : {{ ansible_os_family }}"

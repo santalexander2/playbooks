@@ -1,0 +1,24 @@
+# shell.yaml
+#
+
+
+---
+- name: "SHELL commands"
+  hosts: east
+  become: yes
+  tasks:
+  - name: "Run Curl command"
+    shell: |
+      curl --location "https://www.gnu.org/gnu/gnu.html"
+
+  - name: "Reboot instances"
+    ansible.builtin.reboot:
+
+  - name: "Sleep 60"
+    command: 
+      cmd: sleep 60
+
+  - name: "Run Curl command"
+    shell: |
+      curl --location "https://www.gnu.org/gnu/gnu.html"
+

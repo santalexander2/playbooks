@@ -1,0 +1,13 @@
+# Print of OS of the EC2 instance
+#
+--- 
+- name: "print of OS of the EC2"
+  hosts: north 
+  become: yes
+  vars:
+    ansible_os_family: ubuntu
+  ignore_unreachable: yes
+  tasks: 
+  - name: "print OS variable"
+    debug:
+      var: ansible_os_family

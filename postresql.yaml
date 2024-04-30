@@ -1,0 +1,17 @@
+# name: postgresql.yaml
+
+
+---
+ - name: postgresql
+   hosts: 10.0.0.91
+   become: yes              
+   tasks:               
+   - name: install postgresql
+     apt:                 
+       name: postgresql      
+       state: latest
+
+   - name: start postgresql
+     service:
+       name: postgresql
+       state: started      
